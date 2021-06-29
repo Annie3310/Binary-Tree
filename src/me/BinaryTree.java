@@ -33,15 +33,15 @@ public class BinaryTree<E extends Comparable<E>> {
     /**
      * add 的执行方法
      *
-     * @param node    递归遍历中的当前结点
+     * @param node    递归遍历中的当前节点
      * @param element 要添加到树中的数据
      * @return 添加到树中返回 true, 否则继续调用
      */
     private boolean add(Node<E> node, E element) {
-        // 如果当前结点中的数据比要添加的数据大, 则应该在树的左子树中查找
+        // 如果当前节点中的数据比要添加的数据大, 则应该在树的左子树中查找
         if (node.item.compareTo(element) > 0) {
             Node<E> left = node.left;
-            // 如果左子树不为 null, 则将左子树设为当前结点, 继续递归
+            // 如果左子树不为 null, 则将左子树设为当前节点, 继续递归
             // 如果左子树为 null, 则可以将数据插入到此处, 返回 true, 递归结束
             if (left != null) {
                 return add(left, element);
@@ -69,15 +69,15 @@ public class BinaryTree<E extends Comparable<E>> {
         if (node == null) {
             return false;
         }
-        // 当前结点没有子结点的情况
+        // 当前节点没有子节点的情况
         if (node.left == null && node.right == null) {
             node.deleteCurrentNode();
             size--;
             return true;
         }
-        // 当前结点只有一个子结点的情况
-        // 判断当前结点是否只有一个子结点, 如果只有一个子结点, 先判断有左还是右子结点,
-        // 再判断当前结点是父结点的左还是右子结点,再将父结点指向当前结点的指针指向当前结点的子结点
+        // 当前节点只有一个子节点的情况
+        // 判断当前节点是否只有一个子节点, 如果只有一个子节点, 先判断有左还是右子节点,
+        // 再判断当前节点是父节点的左还是右子节点,再将父节点指向当前节点的指针指向当前节点的子节点
         if (node.left == null | node.right == null) {
             Node<E> childNode = node.left == null ? node.right : node.left;
             if (node.item.compareTo(node.father.item) < 0) {
@@ -90,8 +90,8 @@ public class BinaryTree<E extends Comparable<E>> {
             return true;
         }
 
-        // 当前结点有两个子结点的情况
-        // TODO 两个结点的情况下删除结点
+        // 当前节点有两个子节点的情况
+        // TODO 两个节点的情况下删除节点
         Node currentNode = node;
         node = node.right;
         if (node.left != null) {
@@ -121,9 +121,9 @@ public class BinaryTree<E extends Comparable<E>> {
     /**
      * containsElement 的执行方法
      *
-     * @param node    当前结点
+     * @param node    当前节点
      * @param element 要查找的元素
-     * @return 存在则返回 true, 如果当前结点为空, 说明已经遍历到叶子结点且未找到元素, 返回 false, 这两种情况都不是的情况下继续递归调用自己
+     * @return 存在则返回 true, 如果当前节点为空, 说明已经遍历到叶子节点且未找到元素, 返回 false, 这两种情况都不是的情况下继续递归调用自己
      */
     private Node containsElement(Node node, E element) {
         if (node == null) {
@@ -159,8 +159,8 @@ public class BinaryTree<E extends Comparable<E>> {
      * getAllNode 的层级遍历执行方法
      *
      * @param list  要返回的集合
-     * @param left  父结点的左结点
-     * @param right 父结点的右结点
+     * @param left  父节点的左节点
+     * @param right 父节点的右节点
      */
     private void getAllNode(List list, Node left, Node right) {
         if (left == null && right == null) {
@@ -178,10 +178,10 @@ public class BinaryTree<E extends Comparable<E>> {
 
     /**
      * 暂时没用
-     * 判断是否是叶子结点
+     * 判断是否是叶子节点
      *
-     * @param node 结点
-     * @return 是否是叶子结点
+     * @param node 节点
+     * @return 是否是叶子节点
      */
     private boolean isLeaf(Node node) {
         return node.right == null && node.left == null;
@@ -202,9 +202,9 @@ public class BinaryTree<E extends Comparable<E>> {
     }
 
     /**
-     * 结点内部类
+     * 节点内部类
      *
-     * @param <E> 结点中的数据
+     * @param <E> 节点中的数据
      */
     private class Node<E extends Comparable> {
         Node<E> left;
