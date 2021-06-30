@@ -3,6 +3,9 @@ package me;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author WangJ
+ */
 public class BinaryTree<E extends Comparable<E>> {
     private Node<E> root;
     private Integer size = 0;
@@ -139,6 +142,80 @@ public class BinaryTree<E extends Comparable<E>> {
         } else {
             return containsElement(node.right, element);
         }
+    }
+
+    /**
+     * 前序遍历: 先访问根, 再访问子节点
+     * @return
+     */
+    public List preOrderTraversal() {
+        if (root == null) {
+            return null;
+        }
+        List list = new ArrayList();
+        preOrderTraversal(root, list);
+        return list;
+    }
+
+    /**
+     * 前序遍历执行方法, 递归调用
+     * @param node
+     * @param list
+     */
+    private void preOrderTraversal(Node node, List list) {
+        list.add(node.item);
+        if (node.left != null) {
+            preOrderTraversal(node.left, list);
+        }
+        if (node.right != null) {
+            preOrderTraversal(node.right, list);
+        }
+    }
+
+    /**
+     * 中序遍历: 先访问左子树, 再访问根, 再访问右子树
+     * @return
+     */
+    public List inOrderTraversal() {
+        if (root == null) {
+            return null;
+        }
+        List list = new ArrayList();
+        inOrderTraversal(root, list);
+        return list;
+    }
+
+    private void inOrderTraversal(Node node, List list) {
+        if (node.left != null) {
+            inOrderTraversal(node.left, list);
+        }
+        list.add(node);
+        if (node.right != null) {
+            inOrderTraversal(node.right, list);
+        }
+    }
+
+    /**
+     * 后序遍历: 先访问子树, 再访问根节点
+     * @return
+     */
+    public List postOrderTraversal() {
+        if (root == null) {
+            return null;
+        }
+        List list = new ArrayList();
+        postOrderTraversal(root, list);
+        return list;
+    }
+
+    private void postOrderTraversal(Node node, List list) {
+        if (node.left != null) {
+            postOrderTraversal(node.left, list);
+        }
+        if (node.right != null) {
+            postOrderTraversal(node.right, list);
+        }
+        list.add(node);
     }
 
     /**

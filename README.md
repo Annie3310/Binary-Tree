@@ -4,7 +4,6 @@
 内部类思路参考 `LinkedList`
 
 ### TODO
-- 前中后序遍历
 
 - 删除节点的替换行为
 
@@ -23,3 +22,6 @@
 | getAllNode()               | 广度遍历全部节点                                             |
 | size()                     | 返回树的节点数                                               |
 | isLeaf()                   | 判断是否是叶子节点                                           |
+| preOrderTraversal()| 前序遍历 |
+| inOrderTraversal() | 中序遍历 |
+| postOrderTraversal() | 后序遍历 |
