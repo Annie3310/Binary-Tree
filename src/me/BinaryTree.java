@@ -95,20 +95,20 @@ public class BinaryTree<E extends Comparable<E>> {
 
         // 当前节点有两个子节点的情况
         // TODO 两个节点的情况下删除节点
-        Node currentNode = node;
-        node = node.right;
-        if (node.left != null) {
-            while (true) {
-                if (node.left == null) {
-
-                } else {
-                    node = node.left;
-                }
-            }
-        } else {
-
+        Node maximum = maximum(node.left);
+        if(node.left != maximum) {
+            maximum.left = node.left;
         }
-        return false;
+        maximum.right = node.right;
+        if (node.father.left == node) {
+            node.father.left = maximum;
+        } else {
+            node.father.right = maximum;
+        }
+        maximum.father = node.father;
+        node.deleteCurrentNode();
+        size--;
+        return true;
     }
 
     /**
@@ -163,7 +163,7 @@ public class BinaryTree<E extends Comparable<E>> {
      * @param list
      */
     private void preOrderTraversal(Node node, List list) {
-        list.add(node.item);
+        list.add(node);
         if (node.left != null) {
             preOrderTraversal(node.left, list);
         }
@@ -219,7 +219,7 @@ public class BinaryTree<E extends Comparable<E>> {
     }
 
     /**
-     * 遍历树, 返回集合
+     * 层级遍历树, 返回集合
      *
      * @return 遍历的集合
      */
@@ -228,9 +228,6 @@ public class BinaryTree<E extends Comparable<E>> {
         getAllNode(list, root, null);
         return list;
     }
-    /**
-     * TODO 前序,中序,后序 遍历
-     */
 
     /**
      * getAllNode 的层级遍历执行方法
@@ -253,6 +250,25 @@ public class BinaryTree<E extends Comparable<E>> {
         }
     }
 
+    /**
+     * 返回传入(子)树的最大值
+     * @param node
+     * @return
+     */
+    public Node maximum(Node node) {
+        while (node.right != null) {
+            node = node.right;
+        }
+        return node;
+    }
+
+    /**
+     * 返回树的最大值
+     * @return
+     */
+    public Node maximum() {
+        return maximum(root);
+    }
     /**
      * 暂时没用
      * 判断是否是叶子节点
@@ -283,7 +299,7 @@ public class BinaryTree<E extends Comparable<E>> {
      *
      * @param <E> 节点中的数据
      */
-    private class Node<E extends Comparable> {
+    public class Node<E extends Comparable> {
         Node<E> left;
         E item;
         Node<E> right;
@@ -300,11 +316,21 @@ public class BinaryTree<E extends Comparable<E>> {
             this.father = father;
         }
 
-        public void deleteCurrentNode() {
+        /**
+         * 向 GC 标注可回收
+         */
+        public void deleteCurrentNode(){
             this.left = null;
             this.item = null;
             this.right = null;
+            if (this.father.left == this) {
+                this.father.left = null;
+            }
+            if (this.father.right == this) {
+                this.father.right = null;
+            }
             this.father = null;
+//            super.finalize();
         }
 
         @Override

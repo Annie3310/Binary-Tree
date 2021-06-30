@@ -18,9 +18,15 @@ public class TreeTest {
         tree.add(61);
         tree.add(15);
         tree.add(18);
-//        List list = tree.preOrderTraversal();
-//        List list = tree.inOrderTraversal();
-        List list = tree.postOrderTraversal();
-        System.out.println(list);
+        System.out.println("删除前");
+        System.out.println(tree);
+        tree.remove(33);
+        System.out.println("删除后");
+        System.out.println("前序遍历");
+        System.out.println(tree.preOrderTraversal());
+        System.out.println("中序遍历");
+        System.out.println(tree.inOrderTraversal());
+        System.out.println("后序遍历");
+        System.out.println(tree.postOrderTraversal());
     }
 }
