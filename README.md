@@ -3,10 +3,6 @@
 
 内部类思路参考 `LinkedList`
 
-### TODO
-
-- 删除节点的替换行为
-
 ### 内部类 `Node`
 - left 左节点
 - right 右节点
